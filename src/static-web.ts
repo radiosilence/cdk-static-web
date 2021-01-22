@@ -39,11 +39,11 @@ export class StaticWeb extends cdk.Construct {
     }
   }
 
-  createBucket(): s3.Bucket {
+  private createBucket(): s3.Bucket {
     return new s3.Bucket(this, `Bucket`);
   }
 
-  createDistribution(
+  private createDistribution(
     bucket: s3.IBucket,
     { distributionProps, behaviourProps, isSPA }: StaticWebProps,
     zoneName: string | undefined,
@@ -74,7 +74,7 @@ export class StaticWeb extends cdk.Construct {
     });
   }
 
-  createDeployment(
+  private createDeployment(
     destinationBucket: s3.IBucket,
     { staticPath, deploymentProps }: StaticWebProps,
     distribution: cloudfront.IDistribution,
@@ -87,7 +87,7 @@ export class StaticWeb extends cdk.Construct {
     });
   }
 
-  createARecord(zone: route53.IHostedZone, distribution: cloudfront.IDistribution) {
+  private createARecord(zone: route53.IHostedZone, distribution: cloudfront.IDistribution) {
     return new route53.ARecord(this, `ARecord`, {
       zone,
       target: route53.RecordTarget.fromAlias(new alias.CloudFrontTarget(distribution)),

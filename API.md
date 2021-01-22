@@ -109,7 +109,7 @@ ___
 
 ### createARecord
 
-▸ **createARecord**(`zone`: IHostedZone, `distribution`: IDistribution): *ARecord*
+▸ `Private`**createARecord**(`zone`: IHostedZone, `distribution`: IDistribution): *ARecord*
 
 #### Parameters:
 
@@ -124,7 +124,7 @@ ___
 
 ### createBucket
 
-▸ **createBucket**(): *Bucket*
+▸ `Private`**createBucket**(): *Bucket*
 
 **Returns:** *Bucket*
 
@@ -132,7 +132,7 @@ ___
 
 ### createDeployment
 
-▸ **createDeployment**(`destinationBucket`: IBucket, `__namedParameters`: [*StaticWebProps*](#staticwebprops), `distribution`: IDistribution): *BucketDeployment*
+▸ `Private`**createDeployment**(`destinationBucket`: IBucket, `__namedParameters`: [*StaticWebProps*](#staticwebprops), `distribution`: IDistribution): *BucketDeployment*
 
 #### Parameters:
 
@@ -148,7 +148,7 @@ ___
 
 ### createDistribution
 
-▸ **createDistribution**(`bucket`: IBucket, `__namedParameters`: [*StaticWebProps*](#staticwebprops), `zoneName`: *undefined* | *string*, `certificate`: *undefined* | ICertificate): *Distribution*
+▸ `Private`**createDistribution**(`bucket`: IBucket, `__namedParameters`: [*StaticWebProps*](#staticwebprops), `zoneName`: *undefined* | *string*, `certificate`: *undefined* | ICertificate): *Distribution*
 
 #### Parameters:
 

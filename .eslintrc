@@ -2,6 +2,9 @@
   "extends": "cdk",
   "rules": {
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "max-len": ["error", { "code": 120 }]
+    "max-len": ["error", { "code": 120 }],
+    "prettier/prettier": ["error", {}, {
+      "usePrettierrc": true
+    }]
   }
 }
