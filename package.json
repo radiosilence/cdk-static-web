@@ -1,22 +1,22 @@
 {
-  "name": "static-web",
+  "name": "cdk-static-web",
   "version": "0.1.0",
-  "description": "TODO: Add your description here",
+  "description": "Simple web with Route 53, CloudFront, etc",
   "license": "MIT",
   "author": {
     "name": "James Cleveland",
-    "url": "https://github.com/James Cleveland"
+    "url": "https://github.com/radiosilence"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/James Cleveland/static-web.git"
+    "url": "https://github.com/radiosilence/static-web.git"
   },
-  "homepage": "https://github.com/James Cleveland/static-web",
+  "homepage": "https://github.com/radiosilence/static-web",
   "keywords": [
     "cdk"
   ],
   "engines": {
-    "node": ">= 10.17.0"
+    "node": ">= 14.15.4"
   },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -38,7 +38,15 @@
     "@aws-cdk/core": "^1.86.0"
   },
   "dependencies": {
+    "@aws-cdk/aws-apigateway": "^1.86.0",
+    "@aws-cdk/aws-certificatemanager": "^1.86.0",
+    "@aws-cdk/aws-cloudfront-origins": "^1.86.0",
+    "@aws-cdk/aws-cloudfront": "^1.86.0",
     "@aws-cdk/aws-lambda": "^1.86.0",
+    "@aws-cdk/aws-route53-targets": "^1.86.0",
+    "@aws-cdk/aws-route53": "^1.86.0",
+    "@aws-cdk/aws-s3-deployment": "^1.86.0",
+    "@aws-cdk/aws-s3": "^1.86.0",
     "@aws-cdk/core": "^1.86.0"
   },
   "devDependencies": {
