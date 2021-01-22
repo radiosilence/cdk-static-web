@@ -33,6 +33,7 @@ export class ExampleWebStack extends cdk.Stack {
     new StaticWeb(this, "Example", {
       zone,
       certificate,
+      isSPA: true, // This will make error documents 200 to index.html
       staticPath: "./public",
       distributionProps: {
         priceClass: PriceClass.PRICE_CLASS_100,
