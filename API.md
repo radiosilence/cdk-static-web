@@ -320,7 +320,7 @@ Name | Type |
 
 ### Properties
 
-- [behaviourProps](#behaviourprops)
+- [behaviourOptions](#behaviouroptions)
 - [bucket](#bucket)
 - [certificate](#certificate)
 - [deploymentProps](#deploymentprops)
@@ -332,9 +332,11 @@ Name | Type |
 
 ## Properties
 
-### behaviourProps
+### behaviourOptions
 
-• `Optional` `Readonly` **behaviourProps**: *undefined* | *Partial*<BehaviorOptions\>
+• `Optional` `Readonly` **behaviourOptions**: *undefined* | *Partial*<BehaviorOptions\>
+
+Additional props to pass to CloudFront distribution
 
 ___
 
@@ -342,11 +344,15 @@ ___
 
 • `Optional` `Readonly` **bucket**: *undefined* | IBucket
 
+S3 bucket
+
 ___
 
 ### certificate
 
 • `Optional` `Readonly` **certificate**: *undefined* | ICertificate
+
+ACM certificate
 
 ___
 
@@ -354,11 +360,15 @@ ___
 
 • `Optional` `Readonly` **deploymentProps**: *undefined* | *Partial*<BucketDeploymentProps\>
 
+Additional props to pass to S3 deployment
+
 ___
 
 ### distributionProps
 
 • `Optional` `Readonly` **distributionProps**: *undefined* | *Partial*<DistributionProps\>
+
+Additional props to pass to CloudFront distribution
 
 ___
 
@@ -387,3 +397,5 @@ ___
 ### zone
 
 • `Optional` `Readonly` **zone**: *undefined* | IHostedZone
+
+Route 53 zone
