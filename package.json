@@ -1,0 +1,54 @@
+{
+  "name": "static-web",
+  "version": "0.1.0",
+  "description": "TODO: Add your description here",
+  "license": "MIT",
+  "author": {
+    "name": "James Cleveland",
+    "url": "https://github.com/James Cleveland"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/James Cleveland/static-web.git"
+  },
+  "homepage": "https://github.com/James Cleveland/static-web",
+  "keywords": [
+    "cdk"
+  ],
+  "engines": {
+    "node": ">= 10.17.0"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "cdkdx build",
+    "watch": "cdkdx build -w",
+    "test": "cdkdx test",
+    "lint": "cdkdx lint",
+    "upgrade:cdk": "cdkdx upgrade-cdk",
+    "docgen": "cdkdx docgen",
+    "package": "cdkdx package",
+    "release:npm": "cdkdx release npm"
+  },
+  "peerDependencies": {
+    "@aws-cdk/aws-lambda": "^1.86.0",
+    "@aws-cdk/core": "^1.86.0"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-lambda": "^1.86.0",
+    "@aws-cdk/core": "^1.86.0"
+  },
+  "devDependencies": {
+    "@aws-cdk/assert": "^1.86.0",
+    "@types/node": "^10.17.0",
+    "cdkdx": "^0.7.18"
+  },
+  "eslintConfig": {
+    "extends": [
+      "cdk"
+    ]
+  }
+}
