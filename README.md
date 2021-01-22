@@ -1,4 +1,4 @@
-# static-web
+# cdk-static-web
 
 Simple, injectable construct to host a static website. The AWS examples and other packages seemed to use deprecated stuff so I figured I'd roll my own.
 
