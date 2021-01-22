@@ -7,7 +7,9 @@ test('default setup', () => {
   const stack = new Stack();
 
   // WHEN
-  new StaticWeb(stack, 'StaticWeb');
+  new StaticWeb(stack, 'StaticWeb', {
+    staticPath: '.',
+  });
 
   // THEN
   expectCDK(stack).to(haveResource('AWS::Lambda::Function'));

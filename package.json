@@ -1,7 +1,7 @@
 {
   "name": "cdk-static-web",
-  "version": "0.1.0",
-  "description": "Simple web with Route 53, CloudFront, etc",
+  "version": "0.1.1",
+  "description": "Simple CDK web construct with Route 53, CloudFront, etc",
   "license": "MIT",
   "author": {
     "name": "James Cleveland",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/radiosilence/static-web.git"
+    "url": "https://github.com/radiosilence/cdk-static-web.git"
   },
-  "homepage": "https://github.com/radiosilence/static-web",
+  "homepage": "https://github.com/radiosilence/cdk-static-web",
   "keywords": [
     "cdk"
   ],
   "engines": {
-    "node": ">= 14.15.4"
+    "node": ">= 10.17.0"
   },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
