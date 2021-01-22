@@ -372,11 +372,15 @@ ___
 
 • `Optional` `Readonly` **isSPA**: *undefined* | *boolean*
 
+Whether to resolve 404 errors to index.html with 200
+
 ___
 
 ### staticPath
 
 • `Readonly` **staticPath**: *string*
+
+Path to static files
 
 ___
 

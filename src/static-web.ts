@@ -10,14 +10,45 @@ import * as cdk from '@aws-cdk/core';
 export interface StaticWebProps {
   readonly environment?: Record<string, string>;
 
+  /**
+   * Path to static files
+   */
   readonly staticPath: string;
+
+  /**
+   * Whether to resolve 404 errors to index.html with 200
+   */
   readonly isSPA?: boolean;
+
+  /**
+   * ACM certificate
+   */
   readonly certificate?: acm.ICertificate;
+
+  /**
+   * Route 53 zone
+   */
   readonly zone?: route53.IHostedZone;
+
+  /**
+   * S3 bucket
+   */
   readonly bucket?: s3.IBucket;
+
+  /**
+   * Additional props to pass to CloudFront distribution
+   */
   readonly distributionProps?: Partial<cloudfront.DistributionProps>;
+
+  /**
+   * Additional props to pass to S3 deployment
+   */
   readonly deploymentProps?: Partial<s3deploy.BucketDeploymentProps>;
-  readonly behaviourProps?: Partial<cloudfront.BehaviorOptions>;
+
+  /**
+   * Additional props to pass to CloudFront distribution
+   */
+  readonly behaviourOptions?: Partial<cloudfront.BehaviorOptions>;
 }
 
 export class StaticWeb extends cdk.Construct {
@@ -45,7 +76,7 @@ export class StaticWeb extends cdk.Construct {
 
   private createDistribution(
     bucket: s3.IBucket,
-    { distributionProps, behaviourProps, isSPA }: StaticWebProps,
+    { distributionProps, behaviourOptions, isSPA }: StaticWebProps,
     zoneName: string | undefined,
     certificate: acm.ICertificate | undefined,
   ) {
@@ -64,7 +95,7 @@ export class StaticWeb extends cdk.Construct {
       defaultBehavior: {
         origin: new origins.S3Origin(bucket),
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-        ...behaviourProps,
+        ...behaviourOptions,
       },
       domainNames: zoneName ? [zoneName] : undefined,
       defaultRootObject: 'index.html',
