@@ -92,7 +92,6 @@ export class StaticWeb extends cdk.Construct {
     }
 
     const zoneName = zone?.zoneName;
-
     const domainName = recordName && zoneName ? `${recordName}.${zoneName}` : zoneName;
 
     return new cloudfront.Distribution(this, `Distribution`, {
@@ -136,7 +135,7 @@ export class StaticWeb extends cdk.Construct {
 
   private createAaaaRecord({ recordName, zone }: StaticWebProps, distribution: cloudfront.IDistribution) {
     if (zone) {
-      return new route53.AaaaRecord(this, `ARecord`, {
+      return new route53.AaaaRecord(this, `AAAARecord`, {
         zone,
         recordName,
         target: route53.RecordTarget.fromAlias(new alias.CloudFrontTarget(distribution)),
