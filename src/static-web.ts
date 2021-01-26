@@ -91,16 +91,15 @@ export class StaticWeb extends cdk.Construct {
     }
 
     return new cloudfront.Distribution(this, `Distribution`, {
-      priceClass: cloudfront.PriceClass.PRICE_CLASS_100,
       defaultBehavior: {
         origin: new origins.S3Origin(bucket),
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         ...behaviourOptions,
       },
-      domainNames: zoneName ? [zoneName] : undefined,
+      domainNames: zoneName ? [zoneName] : [],
       defaultRootObject: 'index.html',
       errorResponses,
-      certificate: certificate,
+      certificate,
       ...distributionProps,
     });
   }
