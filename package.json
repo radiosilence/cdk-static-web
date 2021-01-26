@@ -1,6 +1,6 @@
 {
   "name": "cdk-static-web",
-  "version": "0.2.1",
+  "version": "0.3.1",
   "description": "Simple CDK web construct with Route 53, CloudFront, etc",
   "license": "MIT",
   "author": {
@@ -31,7 +31,8 @@
     "upgrade:cdk": "cdkdx upgrade-cdk",
     "docgen": "cdkdx docgen",
     "package": "cdkdx package",
-    "release:npm": "cdkdx release npm"
+    "release:npm": "cdkdx release npm",
+    "prepublishOnly": "yarn lint && yarn build && yarn package && yarn docgen"
   },
   "peerDependencies": {
     "@aws-cdk/aws-lambda": "^1.86.0",
