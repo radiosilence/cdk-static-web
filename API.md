@@ -109,16 +109,15 @@ ___
 
 ### createARecord
 
-▸ `Private`**createARecord**(`zone`: IHostedZone, `distribution`: IDistribution): *ARecord*
+▸ `Private`**createARecord**(`__namedParameters`: [*StaticWebProps*](#staticwebprops), `distribution`: IDistribution): *undefined* | *ARecord*
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`zone` | IHostedZone |
-`distribution` | IDistribution |
+• **__namedParameters**: [*StaticWebProps*](#staticwebprops)
 
-**Returns:** *ARecord*
+• **distribution**: IDistribution
+
+**Returns:** *undefined* | *ARecord*
 
 ___
 
@@ -148,17 +147,13 @@ ___
 
 ### createDistribution
 
-▸ `Private`**createDistribution**(`bucket`: IBucket, `__namedParameters`: [*StaticWebProps*](#staticwebprops), `zoneName`: *undefined* | *string*, `certificate`: *undefined* | ICertificate): *Distribution*
+▸ `Private`**createDistribution**(`bucket`: IBucket, `__namedParameters`: [*StaticWebProps*](#staticwebprops)): *Distribution*
 
 #### Parameters:
 
 • **bucket**: IBucket
 
 • **__namedParameters**: [*StaticWebProps*](#staticwebprops)
-
-• **zoneName**: *undefined* | *string*
-
-• **certificate**: *undefined* | ICertificate
 
 **Returns:** *Distribution*
 
@@ -327,6 +322,7 @@ Name | Type |
 - [distributionProps](#distributionprops)
 - [environment](#environment)
 - [isSPA](#isspa)
+- [recordName](#recordname)
 - [staticPath](#staticpath)
 - [zone](#zone)
 
@@ -383,6 +379,14 @@ ___
 • `Optional` `Readonly` **isSPA**: *undefined* | *boolean*
 
 Whether to resolve 404 errors to index.html with 200
+
+___
+
+### recordName
+
+• `Optional` `Readonly` **recordName**: *undefined* | *string*
+
+The name of your A record, if you're using a subdomain
 
 ___
 
