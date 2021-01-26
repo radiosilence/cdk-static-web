@@ -86,7 +86,7 @@ export class StaticWeb extends cdk.Construct {
       errorResponses.push({
         httpStatus: 404,
         responseHttpStatus: 200,
-        responsePagePath: 'index.html',
+        responsePagePath: '/index.html',
       });
     }
 
