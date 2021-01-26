@@ -34,15 +34,17 @@ cdk-static-web
 
 ### Properties
 
+- [aRecord](#arecord)
+- [aaaaRecord](#aaaarecord)
 - [bucket](#bucket)
 - [deployment](#deployment)
 - [distribution](#distribution)
 - [node](#node)
-- [record](#record)
 
 ### Methods
 
 - [createARecord](#createarecord)
+- [createAaaaRecord](#createaaaarecord)
 - [createBucket](#createbucket)
 - [createDeployment](#createdeployment)
 - [createDistribution](#createdistribution)
@@ -73,6 +75,18 @@ Name | Type |
 
 ## Properties
 
+### aRecord
+
+• `Optional` `Readonly` **aRecord**: *undefined* | *ARecord*
+
+___
+
+### aaaaRecord
+
+• `Optional` `Readonly` **aaaaRecord**: *undefined* | *AaaaRecord*
+
+___
+
 ### bucket
 
 • `Readonly` **bucket**: IBucket
@@ -87,7 +101,7 @@ ___
 
 ### distribution
 
-• `Readonly` **distribution**: *Distribution*
+• `Readonly` **distribution**: IDistribution
 
 ___
 
@@ -98,12 +112,6 @@ ___
 The construct tree node associated with this construct.
 
 **`stability`** stable
-
-___
-
-### record
-
-• `Optional` `Readonly` **record**: *undefined* | *ARecord*
 
 ## Methods
 
@@ -118,6 +126,20 @@ ___
 • **distribution**: IDistribution
 
 **Returns:** *undefined* | *ARecord*
+
+___
+
+### createAaaaRecord
+
+▸ `Private`**createAaaaRecord**(`__namedParameters`: [*StaticWebProps*](#staticwebprops), `distribution`: IDistribution): *undefined* | *AaaaRecord*
+
+#### Parameters:
+
+• **__namedParameters**: [*StaticWebProps*](#staticwebprops)
+
+• **distribution**: IDistribution
+
+**Returns:** *undefined* | *AaaaRecord*
 
 ___
 
