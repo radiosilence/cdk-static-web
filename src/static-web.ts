@@ -26,6 +26,11 @@ export interface StaticWebProps {
   readonly certificate?: acm.ICertificate;
 
   /**
+   * The name of your A record, if you're using a subdomain
+   */
+  readonly recordName?: string;
+
+  /**
    * Route 53 zone
    */
   readonly zone?: route53.IHostedZone;
@@ -59,15 +64,11 @@ export class StaticWeb extends cdk.Construct {
 
   constructor(scope: cdk.Construct, id: string, props: StaticWebProps) {
     super(scope, id);
-    const { zone, certificate } = props;
-
     this.bucket = props.bucket ?? this.createBucket();
-    this.distribution = this.createDistribution(this.bucket, props, zone?.zoneName, certificate);
+    this.distribution = this.createDistribution(this.bucket, props);
     this.deployment = this.createDeployment(this.bucket, props, this.distribution);
 
-    if (zone) {
-      this.record = this.createARecord(zone, this.distribution);
-    }
+    this.record = this.createARecord(props, this.distribution);
   }
 
   private createBucket(): s3.Bucket {
@@ -76,9 +77,7 @@ export class StaticWeb extends cdk.Construct {
 
   private createDistribution(
     bucket: s3.IBucket,
-    { distributionProps, behaviourOptions, isSPA }: StaticWebProps,
-    zoneName: string | undefined,
-    certificate: acm.ICertificate | undefined,
+    { distributionProps, behaviourOptions, isSPA, certificate, recordName, zone }: StaticWebProps,
   ) {
     const errorResponses = [];
 
@@ -90,13 +89,15 @@ export class StaticWeb extends cdk.Construct {
       });
     }
 
+    const domainName = recordName ?? zone?.zoneName;
+
     return new cloudfront.Distribution(this, `Distribution`, {
       defaultBehavior: {
         origin: new origins.S3Origin(bucket),
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         ...behaviourOptions,
       },
-      domainNames: zoneName ? [zoneName] : [],
+      domainNames: domainName ? [domainName] : [],
       defaultRootObject: 'index.html',
       errorResponses,
       certificate,
@@ -117,10 +118,15 @@ export class StaticWeb extends cdk.Construct {
     });
   }
 
-  private createARecord(zone: route53.IHostedZone, distribution: cloudfront.IDistribution) {
-    return new route53.ARecord(this, `ARecord`, {
-      zone,
-      target: route53.RecordTarget.fromAlias(new alias.CloudFrontTarget(distribution)),
-    });
+  private createARecord({ recordName, zone }: StaticWebProps, distribution: cloudfront.IDistribution) {
+    if (zone) {
+      return new route53.ARecord(this, `ARecord`, {
+        zone,
+        recordName,
+        target: route53.RecordTarget.fromAlias(new alias.CloudFrontTarget(distribution)),
+      });
+    } else {
+      return;
+    }
   }
 }
