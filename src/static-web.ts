@@ -58,8 +58,9 @@ export interface StaticWebProps {
 
 export class StaticWeb extends cdk.Construct {
   readonly bucket: s3.IBucket;
-  readonly distribution: cloudfront.Distribution;
-  readonly record?: route53.ARecord;
+  readonly distribution: cloudfront.IDistribution;
+  readonly aRecord?: route53.ARecord;
+  readonly aaaaRecord?: route53.AaaaRecord;
   readonly deployment?: s3deploy.BucketDeployment;
 
   constructor(scope: cdk.Construct, id: string, props: StaticWebProps) {
@@ -68,7 +69,8 @@ export class StaticWeb extends cdk.Construct {
     this.distribution = this.createDistribution(this.bucket, props);
     this.deployment = this.createDeployment(this.bucket, props, this.distribution);
 
-    this.record = this.createARecord(props, this.distribution);
+    this.aRecord = this.createARecord(props, this.distribution);
+    this.aaaaRecord = this.createAaaaRecord(props, this.distribution);
   }
 
   private createBucket(): s3.Bucket {
@@ -123,6 +125,18 @@ export class StaticWeb extends cdk.Construct {
   private createARecord({ recordName, zone }: StaticWebProps, distribution: cloudfront.IDistribution) {
     if (zone) {
       return new route53.ARecord(this, `ARecord`, {
+        zone,
+        recordName,
+        target: route53.RecordTarget.fromAlias(new alias.CloudFrontTarget(distribution)),
+      });
+    } else {
+      return;
+    }
+  }
+
+  private createAaaaRecord({ recordName, zone }: StaticWebProps, distribution: cloudfront.IDistribution) {
+    if (zone) {
+      return new route53.AaaaRecord(this, `ARecord`, {
         zone,
         recordName,
         target: route53.RecordTarget.fromAlias(new alias.CloudFrontTarget(distribution)),
