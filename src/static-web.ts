@@ -89,7 +89,9 @@ export class StaticWeb extends cdk.Construct {
       });
     }
 
-    const domainName = recordName ?? zone?.zoneName;
+    const zoneName = zone?.zoneName;
+
+    const domainName = recordName && zoneName ? `${recordName}.${zoneName}` : zoneName;
 
     return new cloudfront.Distribution(this, `Distribution`, {
       defaultBehavior: {
