@@ -1,6 +1,6 @@
 {
   "name": "cdk-static-web",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Simple CDK web construct with Route 53, CloudFront, etc",
   "license": "MIT",
   "author": {
@@ -40,13 +40,13 @@
   "dependencies": {
     "@aws-cdk/aws-apigateway": "^1.86.0",
     "@aws-cdk/aws-certificatemanager": "^1.86.0",
-    "@aws-cdk/aws-cloudfront-origins": "^1.86.0",
     "@aws-cdk/aws-cloudfront": "^1.86.0",
+    "@aws-cdk/aws-cloudfront-origins": "^1.86.0",
     "@aws-cdk/aws-lambda": "^1.86.0",
-    "@aws-cdk/aws-route53-targets": "^1.86.0",
     "@aws-cdk/aws-route53": "^1.86.0",
-    "@aws-cdk/aws-s3-deployment": "^1.86.0",
+    "@aws-cdk/aws-route53-targets": "^1.86.0",
     "@aws-cdk/aws-s3": "^1.86.0",
+    "@aws-cdk/aws-s3-deployment": "^1.86.0",
     "@aws-cdk/core": "^1.86.0"
   },
   "devDependencies": {
