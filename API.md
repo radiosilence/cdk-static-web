@@ -77,13 +77,13 @@ Name | Type |
 
 ### aRecord
 
-• `Optional` `Readonly` **aRecord**: *undefined* | *ARecord*
+• `Optional` `Readonly` **aRecord**: *undefined* \| *ARecord*
 
 ___
 
 ### aaaaRecord
 
-• `Optional` `Readonly` **aaaaRecord**: *undefined* | *AaaaRecord*
+• `Optional` `Readonly` **aaaaRecord**: *undefined* \| *AaaaRecord*
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 ### deployment
 
-• `Optional` `Readonly` **deployment**: *undefined* | *BucketDeployment*
+• `Optional` `Readonly` **deployment**: *undefined* \| *BucketDeployment*
 
 ___
 
@@ -117,7 +117,7 @@ The construct tree node associated with this construct.
 
 ### createARecord
 
-▸ `Private`**createARecord**(`__namedParameters`: [*StaticWebProps*](#staticwebprops), `distribution`: IDistribution): *undefined* | *ARecord*
+▸ `Private`**createARecord**(`__namedParameters`: [*StaticWebProps*](#staticwebprops), `distribution`: IDistribution): *undefined* \| *ARecord*
 
 #### Parameters:
 
@@ -125,13 +125,13 @@ The construct tree node associated with this construct.
 
 • **distribution**: IDistribution
 
-**Returns:** *undefined* | *ARecord*
+**Returns:** *undefined* \| *ARecord*
 
 ___
 
 ### createAaaaRecord
 
-▸ `Private`**createAaaaRecord**(`__namedParameters`: [*StaticWebProps*](#staticwebprops), `distribution`: IDistribution): *undefined* | *AaaaRecord*
+▸ `Private`**createAaaaRecord**(`__namedParameters`: [*StaticWebProps*](#staticwebprops), `distribution`: IDistribution): *undefined* \| *AaaaRecord*
 
 #### Parameters:
 
@@ -139,7 +139,7 @@ ___
 
 • **distribution**: IDistribution
 
-**Returns:** *undefined* | *AaaaRecord*
+**Returns:** *undefined* \| *AaaaRecord*
 
 ___
 
@@ -352,7 +352,7 @@ Name | Type |
 
 ### behaviourOptions
 
-• `Optional` `Readonly` **behaviourOptions**: *undefined* | *Partial*<BehaviorOptions\>
+• `Optional` `Readonly` **behaviourOptions**: *undefined* \| *Partial*<BehaviorOptions\>
 
 Additional props to pass to CloudFront distribution
 
@@ -360,7 +360,7 @@ ___
 
 ### bucket
 
-• `Optional` `Readonly` **bucket**: *undefined* | IBucket
+• `Optional` `Readonly` **bucket**: *undefined* \| IBucket
 
 S3 bucket
 
@@ -368,7 +368,7 @@ ___
 
 ### certificate
 
-• `Optional` `Readonly` **certificate**: *undefined* | ICertificate
+• `Optional` `Readonly` **certificate**: *undefined* \| ICertificate
 
 ACM certificate
 
@@ -376,7 +376,7 @@ ___
 
 ### deploymentProps
 
-• `Optional` `Readonly` **deploymentProps**: *undefined* | *Partial*<BucketDeploymentProps\>
+• `Optional` `Readonly` **deploymentProps**: *undefined* \| *Partial*<BucketDeploymentProps\>
 
 Additional props to pass to S3 deployment
 
@@ -384,7 +384,7 @@ ___
 
 ### distributionProps
 
-• `Optional` `Readonly` **distributionProps**: *undefined* | *Partial*<DistributionProps\>
+• `Optional` `Readonly` **distributionProps**: *undefined* \| *Partial*<DistributionProps\>
 
 Additional props to pass to CloudFront distribution
 
@@ -392,13 +392,13 @@ ___
 
 ### environment
 
-• `Optional` `Readonly` **environment**: *undefined* | *Record*<*string*, *string*\>
+• `Optional` `Readonly` **environment**: *undefined* \| *Record*<*string*, *string*\>
 
 ___
 
 ### isSPA
 
-• `Optional` `Readonly` **isSPA**: *undefined* | *boolean*
+• `Optional` `Readonly` **isSPA**: *undefined* \| *boolean*
 
 Whether to resolve 404 errors to index.html with 200
 
@@ -406,7 +406,7 @@ ___
 
 ### recordName
 
-• `Optional` `Readonly` **recordName**: *undefined* | *string*
+• `Optional` `Readonly` **recordName**: *undefined* \| *string*
 
 The name of your A record, if you're using a subdomain
 
@@ -422,6 +422,6 @@ ___
 
 ### zone
 
-• `Optional` `Readonly` **zone**: *undefined* | IHostedZone
+• `Optional` `Readonly` **zone**: *undefined* \| IHostedZone
 
 Route 53 zone
