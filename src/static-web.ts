@@ -89,6 +89,12 @@ export class StaticWeb extends cdk.Construct {
         responseHttpStatus: 200,
         responsePagePath: '/index.html',
       });
+
+      errorResponses.push({
+        httpStatus: 403,
+        responseHttpStatus: 200,
+        responsePagePath: '/index.html',
+      });
     }
 
     const zoneName = zone?.zoneName;
