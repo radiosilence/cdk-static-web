@@ -66,7 +66,7 @@ cdk-static-web
 #### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `scope` | *Construct* |
 `id` | *string* |
 `props` | [*StaticWebProps*](#staticwebprops) |
@@ -121,9 +121,10 @@ The construct tree node associated with this construct.
 
 #### Parameters:
 
-• **__namedParameters**: [*StaticWebProps*](#staticwebprops)
-
-• **distribution**: IDistribution
+Name | Type |
+:------ | :------ |
+`__namedParameters` | [*StaticWebProps*](#staticwebprops) |
+`distribution` | IDistribution |
 
 **Returns:** *undefined* \| *ARecord*
 
@@ -135,9 +136,10 @@ ___
 
 #### Parameters:
 
-• **__namedParameters**: [*StaticWebProps*](#staticwebprops)
-
-• **distribution**: IDistribution
+Name | Type |
+:------ | :------ |
+`__namedParameters` | [*StaticWebProps*](#staticwebprops) |
+`distribution` | IDistribution |
 
 **Returns:** *undefined* \| *AaaaRecord*
 
@@ -157,11 +159,11 @@ ___
 
 #### Parameters:
 
-• **destinationBucket**: IBucket
-
-• **__namedParameters**: [*StaticWebProps*](#staticwebprops)
-
-• **distribution**: IDistribution
+Name | Type |
+:------ | :------ |
+`destinationBucket` | IBucket |
+`__namedParameters` | [*StaticWebProps*](#staticwebprops) |
+`distribution` | IDistribution |
 
 **Returns:** *BucketDeployment*
 
@@ -173,9 +175,10 @@ ___
 
 #### Parameters:
 
-• **bucket**: IBucket
-
-• **__namedParameters**: [*StaticWebProps*](#staticwebprops)
+Name | Type |
+:------ | :------ |
+`bucket` | IBucket |
+`__namedParameters` | [*StaticWebProps*](#staticwebprops) |
 
 **Returns:** *Distribution*
 
@@ -214,7 +217,7 @@ as they participate in synthesizing the cloud assembly.
 #### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
+:------ | :------ | :------ |
 `session` | ISynthesisSession | The synthesis session.   |
 
 **Returns:** *void*
@@ -271,7 +274,7 @@ as they participate in synthesizing the cloud assembly.
 #### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
+:------ | :------ | :------ |
 `session` | ISynthesisSession | The synthesis session.   |
 
 **Returns:** *void*
@@ -318,7 +321,7 @@ Return whether the given object is a Construct.
 #### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `x` | *any* |
 
 **Returns:** x is Construct
@@ -328,10 +331,6 @@ Name | Type |
 [cdk-static-web](#readme) / StaticWebProps
 
 # Interface: StaticWebProps
-
-## Hierarchy
-
-* **StaticWebProps**
 
 ## Table of contents
 
@@ -392,7 +391,7 @@ ___
 
 ### environment
 
-• `Optional` `Readonly` **environment**: *undefined* \| *Record*<*string*, *string*\>
+• `Optional` `Readonly` **environment**: *undefined* \| *Record*<string, string\>
 
 ___
 
