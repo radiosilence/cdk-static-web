@@ -69,6 +69,4 @@ typings/
 .DS_Store
 lib
 *.tsbuildinfo
-tsconfig.json
-tsconfig.eslint.json
 dist
