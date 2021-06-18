@@ -85,12 +85,11 @@ export class StaticWeb extends cdk.Construct {
 
   private createIAMStatement(bucket: s3.IBucket, originAccessIdentity: cloudfront.OriginAccessIdentity) {
     const statement = new iam.PolicyStatement();
-    statement.addActions('s3:GetBucket*');
-    statement.addActions('s3:GetObject*');
-    statement.addActions('s3:List*');
-    statement.addResources(bucket.bucketArn);
-    statement.addResources(`${bucket.bucketArn}/*`);
+
+    statement.addActions('s3:GetBucket*', 's3:GetObject*', 's3:List*');
+    statement.addResources(bucket.bucketArn, `${bucket.bucketArn}/*`);
     statement.addCanonicalUserPrincipal(originAccessIdentity.cloudFrontOriginAccessIdentityS3CanonicalUserId);
+
     return statement;
   }
 
