@@ -2,11 +2,14 @@ import * as acm from '@aws-cdk/aws-certificatemanager';
 import * as cloudfront from '@aws-cdk/aws-cloudfront';
 import * as origins from '@aws-cdk/aws-cloudfront-origins';
 import * as iam from '@aws-cdk/aws-iam';
+import * as lambda from '@aws-cdk/aws-lambda';
+import { NodejsFunction } from '@aws-cdk/aws-lambda-nodejs';
 import * as route53 from '@aws-cdk/aws-route53';
 import * as alias from '@aws-cdk/aws-route53-targets';
 import * as s3 from '@aws-cdk/aws-s3';
 import * as s3deploy from '@aws-cdk/aws-s3-deployment';
 import * as cdk from '@aws-cdk/core';
+import * as path from 'path';
 
 export interface StaticWebProps {
   readonly environment?: Record<string, string>;
@@ -20,6 +23,12 @@ export interface StaticWebProps {
    * Whether to resolve 404 errors to index.html with 200
    */
   readonly isSPA?: boolean;
+
+  /**
+   * Default nested indexes (requires edge lambda)
+   */
+
+  readonly defaultIndexes?: boolean;
 
   /**
    * ACM certificate
@@ -67,9 +76,13 @@ export class StaticWeb extends cdk.Construct {
 
   constructor(scope: cdk.Construct, id: string, props: StaticWebProps) {
     super(scope, id);
+    let lambda: lambda.Function | undefined;
     this.originAccessIdentity = this.createOriginAccessIdentity();
     this.bucket = props.bucket ?? this.createBucket();
-    this.distribution = this.createDistribution(this.bucket, this.originAccessIdentity, props);
+    if (props.defaultIndexes) {
+      lambda = this.createIndexLambda();
+    }
+    this.distribution = this.createDistribution(this.bucket, this.originAccessIdentity, lambda, props);
     const statement = this.createIAMStatement(this.bucket, this.originAccessIdentity);
     this.bucket.addToResourcePolicy(statement);
     this.deployment = this.createDeployment(this.bucket, props, this.distribution);
@@ -93,9 +106,19 @@ export class StaticWeb extends cdk.Construct {
     return statement;
   }
 
+  private createIndexLambda() {
+    return new NodejsFunction(this, 'IndexLambda', {
+      runtime: lambda.Runtime.NODEJS_14_X,
+      handler: 'handler',
+      memorySize: 128,
+      entry: path.join(__dirname, 'lambdas', 'resolve.ts'),
+    });
+  }
+
   private createDistribution(
     bucket: s3.IBucket,
     originAccessIdentity: cloudfront.OriginAccessIdentity,
+    indexLambda: lambda.Function | undefined,
     { distributionProps, behaviourOptions, isSPA, certificate, recordName, zone }: StaticWebProps,
   ) {
     const errorResponses = [];
@@ -111,6 +134,17 @@ export class StaticWeb extends cdk.Construct {
         httpStatus: 403,
         responseHttpStatus: 200,
         responsePagePath: '/index.html',
+      });
+    }
+
+    const edgeLambdas: cloudfront.EdgeLambda[] = [];
+
+    if (indexLambda) {
+      edgeLambdas.push({
+        eventType: cloudfront.LambdaEdgeEventType.ORIGIN_REQUEST,
+        functionVersion: new lambda.Version(this, 'IndexLambdaVersion', {
+          lambda: indexLambda,
+        }),
       });
     }
 
