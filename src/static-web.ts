@@ -171,6 +171,7 @@ export class StaticWeb extends cdk.Construct {
     return new cloudfront.OriginAccessIdentity(this, `OriginAccessIdentity`);
   }
 
+  /* eslint-disable */
   private createDeployment(
     destinationBucket: s3.IBucket,
     { staticPath, deploymentProps }: StaticWebProps,
