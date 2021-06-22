@@ -157,6 +157,7 @@ export class StaticWeb extends cdk.Construct {
           originAccessIdentity,
         }),
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        edgeLambdas,
         ...behaviourOptions,
       },
       domainNames: domainName ? [domainName] : [],
