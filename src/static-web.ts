@@ -64,6 +64,11 @@ export interface StaticWebProps {
    * Additional props to pass to CloudFront distribution
    */
   readonly behaviourOptions?: Partial<cloudfront.BehaviorOptions>;
+
+  /**
+   *  Error page template. Example '/{CODE}.html'
+   */
+  readonly errorPagePath?: string;
 }
 
 export class StaticWeb extends cdk.Construct {
@@ -119,7 +124,7 @@ export class StaticWeb extends cdk.Construct {
     bucket: s3.IBucket,
     originAccessIdentity: cloudfront.OriginAccessIdentity,
     indexLambda: lambda.Function | undefined,
-    { distributionProps, behaviourOptions, isSPA, certificate, recordName, zone }: StaticWebProps,
+    { distributionProps, behaviourOptions, isSPA, certificate, recordName, zone, errorPagePath }: StaticWebProps,
   ) {
     const errorResponses = [];
 
@@ -135,17 +140,17 @@ export class StaticWeb extends cdk.Construct {
         responseHttpStatus: 200,
         responsePagePath: '/index.html',
       });
-    } else {
+    } else if (errorPagePath) {
       errorResponses.push({
         httpStatus: 404,
         responseHttpStatus: 200,
-        responsePagePath: '/404.html',
+        responsePagePath: errorPagePath.replace('{CODE}', '404'),
       });
 
       errorResponses.push({
         httpStatus: 403,
         responseHttpStatus: 200,
-        responsePagePath: '/403.html',
+        responsePagePath: errorPagePath.replace('{CODE}', '403'),
       });
     }
 
