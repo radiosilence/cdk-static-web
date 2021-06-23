@@ -1,13 +1,14 @@
-import type { CloudFrontRequestEvent, CloudFrontRequestResult } from 'aws-lambda';
+import type { CloudFrontRequestCallback, CloudFrontRequestEvent, Context } from 'aws-lambda';
 
-export async function handler(event: CloudFrontRequestEvent): Promise<CloudFrontRequestResult> {
+function handler(event: CloudFrontRequestEvent, _: Context, callback: CloudFrontRequestCallback) {
   const request = event.Records[0].cf.request;
-  const url = new URL(request.uri);
 
-  if (url.pathname.split('/').slice(-1)[0]?.split('.').length < 2) {
-    url.pathname = `${url.pathname.replace(/\/$/, '')}/index.html`;
+  if (request.uri.split('/').slice(-1)[0]?.split('.').length < 2) {
+    request.uri = `${request.uri.replace(/\/$/, '')}/index.html`;
   }
-  request.uri = url.href;
+
   console.log('new uri', request.uri);
-  return request;
+  callback(null, request);
 }
+
+exports.handler = handler;
