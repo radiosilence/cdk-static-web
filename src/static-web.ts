@@ -111,7 +111,7 @@ export class StaticWeb extends cdk.Construct {
       runtime: lambda.Runtime.NODEJS_14_X,
       handler: 'handler',
       memorySize: 128,
-      entry: path.join(__dirname, 'lambdas', 'resolve.ts'),
+      entry: path.join(__dirname, '..', 'src', 'lambdas', 'resolve.ts'),
     });
   }
 
@@ -134,6 +134,18 @@ export class StaticWeb extends cdk.Construct {
         httpStatus: 403,
         responseHttpStatus: 200,
         responsePagePath: '/index.html',
+      });
+    } else {
+      errorResponses.push({
+        httpStatus: 404,
+        responseHttpStatus: 200,
+        responsePagePath: '/404.html',
+      });
+
+      errorResponses.push({
+        httpStatus: 403,
+        responseHttpStatus: 200,
+        responsePagePath: '/403.html',
       });
     }
 
