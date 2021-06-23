@@ -159,9 +159,7 @@ export class StaticWeb extends cdk.Construct {
     if (indexLambda) {
       edgeLambdas.push({
         eventType: cloudfront.LambdaEdgeEventType.ORIGIN_REQUEST,
-        functionVersion: new lambda.Version(this, 'IndexLambdaVersion', {
-          lambda: indexLambda,
-        }),
+        functionVersion: indexLambda.currentVersion,
       });
     }
 
