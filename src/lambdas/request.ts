@@ -5,10 +5,12 @@ export async function handler(event: CloudFrontRequestEvent): Promise<CloudFront
   const request = event.Records[0].cf.request;
   const extension = path.extname(request.uri);
 
+  request.headers['x-original-uri'] = [{ key: 'x-original-uri', value: request.uri }];
+
   if (!extension) {
-    request.headers['x-original-uri'] = [{ key: 'x-original-uri', value: request.uri }];
     request.headers['x-rewritten'] = [{ key: 'x-rewritten', value: 'true' }];
     request.uri = `${request.uri.replace(/\/$/, '')}/index.html`;
+
     console.log('updated uri to', request.uri);
   }
 

@@ -1,34 +1,41 @@
 import type { CloudFrontResponseEvent, CloudFrontResponseResult } from 'aws-lambda';
-import * as path from 'path';
 export async function handler(event: CloudFrontResponseEvent): Promise<CloudFrontResponseResult> {
-  console.log('event', event);
-  const { request, response } = event.Records[0].cf;
-  const extension = path.extname(request.uri);
+  try {
+    console.log('event', event);
+    const { request, response } = event.Records[0].cf;
 
-  const rewritten = request.headers['x-rewritten'];
+    const rewritten = request.headers['x-rewritten'];
+    const originalUri = request.headers['x-original-uri']?.[0]?.value;
 
-  if (rewritten) {
-    const { uri } = request;
-    const value = uri.replace('index.html', '');
-    console.log('nextUri', value);
+    if (rewritten) {
+      const { uri, querystring } = request;
+      let value = uri.replace('index.html', '');
 
-    const originalUri = request.headers['x-original-uri'][0].value;
+      if (request.querystring) {
+        value += `?${querystring}`;
+      }
 
-    if (!originalUri.endsWith('/')) {
-      return {
-        status: '302',
-        statusDescription: 'Found',
-        headers: {
-          location: [
-            {
-              key: 'Location',
-              value,
-            },
-          ],
-        },
-      };
+      console.log('redirecting to', value);
+
+      if (!originalUri.endsWith('/')) {
+        return {
+          status: '302',
+          statusDescription: 'Found',
+          headers: {
+            location: [{ key: 'Location', value }],
+            'content-type': [{ key: 'Content-Type', value: 'application/json' }],
+          },
+          body: JSON.stringify({ request, response, originalUri }),
+        };
+      }
     }
-  }
 
-  return response;
+    return response;
+  } catch (err) {
+    return {
+      status: '500',
+      statusDescription: 'Internal Server Error',
+      body: `${err}`,
+    };
+  }
 }
