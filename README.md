@@ -2,6 +2,11 @@
 
 Simple, injectable construct to host a static website. The AWS examples and other packages seemed to use deprecated stuff so I figured I'd roll my own.
 
+## Features
+
+* Origin Access Identities
+* Optional index path rewriting and redirection (`/potato` will rewrite to `/potato/index.html` and also redirect to `/potato/`).
+
 ## Example
 
 ```ts
