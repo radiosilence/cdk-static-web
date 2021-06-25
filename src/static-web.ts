@@ -111,18 +111,18 @@ export class StaticWeb extends cdk.Construct {
   private createRequestLambda() {
     return new NodejsFunction(this, 'RequestLambda', {
       runtime: lambda.Runtime.NODEJS_14_X,
-      handler: 'index.handler',
+      handler: 'handler',
       memorySize: 128,
-      entry: path.join(__dirname, 'lambdas', 'request'),
+      entry: path.join(__dirname, 'lambdas', 'request', 'index.js'),
     });
   }
 
   private createResponseLambda() {
     return new NodejsFunction(this, 'ResponseLambda', {
       runtime: lambda.Runtime.NODEJS_14_X,
-      handler: 'index.handler',
+      handler: 'handler',
       memorySize: 128,
-      entry: path.join(__dirname, 'lambdas', 'response'),
+      entry: path.join(__dirname, 'lambdas', 'response', 'index.js'),
     });
   }
 
