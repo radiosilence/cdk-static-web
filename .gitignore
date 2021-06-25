@@ -69,4 +69,7 @@ typings/
 .DS_Store
 lib
 *.tsbuildinfo
-dist
+tsconfig.json
+tsconfig.eslint.json
+cdk.out
+cdk.context.json
