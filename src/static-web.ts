@@ -81,13 +81,10 @@ export class StaticWeb extends cdk.Construct {
 
   constructor(scope: cdk.Construct, id: string, props: StaticWebProps) {
     super(scope, id);
-    let lambda: lambda.Function | undefined;
+
     this.originAccessIdentity = this.createOriginAccessIdentity();
     this.bucket = props.bucket ?? this.createBucket();
-    if (props.defaultIndexes) {
-      lambda = this.createIndexLambda();
-    }
-    this.distribution = this.createDistribution(this.bucket, this.originAccessIdentity, lambda, props);
+    this.distribution = this.createDistribution(this.bucket, this.originAccessIdentity, props);
     const statement = this.createIAMStatement(this.bucket, this.originAccessIdentity);
     this.bucket.addToResourcePolicy(statement);
     this.deployment = this.createDeployment(this.bucket, props, this.distribution);
@@ -111,20 +108,37 @@ export class StaticWeb extends cdk.Construct {
     return statement;
   }
 
-  private createIndexLambda() {
-    return new NodejsFunction(this, 'IndexLambda', {
+  private createRequestLambda() {
+    return new NodejsFunction(this, 'RequestLambda', {
       runtime: lambda.Runtime.NODEJS_14_X,
       handler: 'handler',
       memorySize: 128,
-      entry: path.join(__dirname, '..', 'src', 'lambdas', 'resolve.ts'),
+      entry: path.join(__dirname, '..', 'src', 'lambdas', 'request.ts'),
+    });
+  }
+
+  private createResponseLambda() {
+    return new NodejsFunction(this, 'RequestLambda', {
+      runtime: lambda.Runtime.NODEJS_14_X,
+      handler: 'handler',
+      memorySize: 128,
+      entry: path.join(__dirname, '..', 'src', 'lambdas', 'response.ts'),
     });
   }
 
   private createDistribution(
     bucket: s3.IBucket,
     originAccessIdentity: cloudfront.OriginAccessIdentity,
-    indexLambda: lambda.Function | undefined,
-    { distributionProps, behaviourOptions, isSPA, certificate, recordName, zone, errorPagePath }: StaticWebProps,
+    {
+      distributionProps,
+      behaviourOptions,
+      isSPA,
+      certificate,
+      recordName,
+      zone,
+      errorPagePath,
+      defaultIndexes,
+    }: StaticWebProps,
   ) {
     const errorResponses = [];
 
@@ -156,10 +170,14 @@ export class StaticWeb extends cdk.Construct {
 
     const edgeLambdas: cloudfront.EdgeLambda[] = [];
 
-    if (indexLambda) {
+    if (defaultIndexes) {
       edgeLambdas.push({
         eventType: cloudfront.LambdaEdgeEventType.ORIGIN_REQUEST,
-        functionVersion: indexLambda.currentVersion,
+        functionVersion: this.createRequestLambda().currentVersion,
+      });
+      edgeLambdas.push({
+        eventType: cloudfront.LambdaEdgeEventType.ORIGIN_RESPONSE,
+        functionVersion: this.createResponseLambda().currentVersion,
       });
     }
 
