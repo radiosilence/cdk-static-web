@@ -12,7 +12,7 @@ export async function handler(event: CloudFrontRequestEvent): Promise<CloudFront
       request.headers['x-rewritten'] = [{ key: 'x-rewritten', value: 'true' }];
       request.uri = `${request.uri.replace(/\/$/, '')}/index.html`;
 
-      console.log('updated uri to', request.uri);
+      console.log('rewritten:', request.uri);
     }
 
     return request;

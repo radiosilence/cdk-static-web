@@ -15,7 +15,7 @@ export async function handler(event: CloudFrontResponseEvent): Promise<CloudFron
         value += `?${querystring}`;
       }
 
-      console.log('redirecting to', value);
+      console.log('redirect:', value);
 
       if (!originalUri.endsWith('/')) {
         return {
@@ -23,9 +23,8 @@ export async function handler(event: CloudFrontResponseEvent): Promise<CloudFron
           statusDescription: 'Found',
           headers: {
             location: [{ key: 'Location', value }],
-            'content-type': [{ key: 'Content-Type', value: 'application/json' }],
           },
-          body: JSON.stringify({ request, response, originalUri }),
+          body: '',
         };
       }
     }
