@@ -129,7 +129,10 @@ export class StaticWeb extends cdk.Construct {
   private createDistribution(
     bucket: s3.IBucket,
     originAccessIdentity: cloudfront.OriginAccessIdentity,
-    {
+    props: StaticWebProps,
+  ) {
+    const errorResponses = [];
+    const {
       distributionProps,
       behaviourOptions,
       isSPA,
@@ -138,10 +141,7 @@ export class StaticWeb extends cdk.Construct {
       zone,
       errorPagePath,
       defaultIndexes,
-    }: StaticWebProps,
-  ) {
-    const errorResponses = [];
-
+    } = props;
     if (isSPA) {
       errorResponses.push({
         httpStatus: 404,
