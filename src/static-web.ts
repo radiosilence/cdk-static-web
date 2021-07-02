@@ -27,7 +27,6 @@ export interface StaticWebProps {
   /**
    * Default nested indexes (requires edge lambda)
    */
-
   readonly defaultIndexes?: boolean;
 
   /**
