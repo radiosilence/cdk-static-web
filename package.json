@@ -1,6 +1,6 @@
 {
   "name": "cdk-static-web",
-  "version": "1.111.0",
+  "version": "1.113.0",
   "description": "Simple CDK web construct with Route 53, CloudFront, etc",
   "license": "MIT",
   "author": {
@@ -35,26 +35,26 @@
     "prepublishOnly": "yarn build"
   },
   "peerDependencies": {
-    "@aws-cdk/aws-lambda": "^1.111.0",
-    "@aws-cdk/core": "^1.111.0"
+    "@aws-cdk/aws-lambda": "^1.113.0",
+    "@aws-cdk/core": "^1.113.0"
   },
   "dependencies": {
-    "@aws-cdk/aws-apigateway": "^1.111.0",
-    "@aws-cdk/aws-certificatemanager": "^1.111.0",
-    "@aws-cdk/aws-cloudfront": "^1.111.0",
-    "@aws-cdk/aws-cloudfront-origins": "^1.111.0",
-    "@aws-cdk/aws-iam": "^1.111.0",
-    "@aws-cdk/aws-lambda": "^1.111.0",
-    "@aws-cdk/aws-lambda-nodejs": "^1.111.0",
-    "@aws-cdk/aws-route53": "^1.111.0",
-    "@aws-cdk/aws-route53-targets": "^1.111.0",
-    "@aws-cdk/aws-s3": "^1.111.0",
-    "@aws-cdk/aws-s3-deployment": "^1.111.0",
-    "@aws-cdk/core": "^1.111.0",
+    "@aws-cdk/aws-apigateway": "^1.113.0",
+    "@aws-cdk/aws-certificatemanager": "^1.113.0",
+    "@aws-cdk/aws-cloudfront": "^1.113.0",
+    "@aws-cdk/aws-cloudfront-origins": "^1.113.0",
+    "@aws-cdk/aws-iam": "^1.113.0",
+    "@aws-cdk/aws-lambda": "^1.113.0",
+    "@aws-cdk/aws-lambda-nodejs": "^1.113.0",
+    "@aws-cdk/aws-route53": "^1.113.0",
+    "@aws-cdk/aws-route53-targets": "^1.113.0",
+    "@aws-cdk/aws-s3": "^1.113.0",
+    "@aws-cdk/aws-s3-deployment": "^1.113.0",
+    "@aws-cdk/core": "^1.113.0",
     "esbuild": "^0.12.9"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.111.0",
+    "@aws-cdk/assert": "^1.113.0",
     "@types/aws-lambda": "^8.10.77",
     "@types/node": "^15.12.3",
     "cdkdx": "^1.1.0"

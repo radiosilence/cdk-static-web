@@ -81,6 +81,10 @@ export class StaticWeb extends cdk.Construct {
   constructor(scope: cdk.Construct, id: string, props: StaticWebProps) {
     super(scope, id);
 
+    if (props.environment?.region !== 'us-east-1' && props.defaultIndexes) {
+      throw new Error('If using defaultIndexes, you must use region us-east-1 due to Lambda@Edge');
+    }
+
     this.originAccessIdentity = this.createOriginAccessIdentity();
     this.bucket = props.bucket ?? this.createBucket();
     this.distribution = this.createDistribution(this.bucket, this.originAccessIdentity, props);
