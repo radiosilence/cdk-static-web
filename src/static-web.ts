@@ -3,13 +3,13 @@ import * as cloudfront from '@aws-cdk/aws-cloudfront';
 import * as origins from '@aws-cdk/aws-cloudfront-origins';
 import * as iam from '@aws-cdk/aws-iam';
 import * as lambda from '@aws-cdk/aws-lambda';
-import { NodejsFunction } from '@aws-cdk/aws-lambda-nodejs';
 import * as route53 from '@aws-cdk/aws-route53';
 import * as alias from '@aws-cdk/aws-route53-targets';
 import * as s3 from '@aws-cdk/aws-s3';
 import * as s3deploy from '@aws-cdk/aws-s3-deployment';
 import * as cdk from '@aws-cdk/core';
 import * as path from 'path';
+import { NodejsEdgeFunction } from './lambda-edge-nodejs';
 
 export interface StaticWebProps extends cdk.StackProps {
   readonly environment?: Record<string, string>;
@@ -112,7 +112,7 @@ export class StaticWeb extends cdk.Construct {
   }
 
   private createRequestLambda() {
-    return new NodejsFunction(this, 'RequestLambda', {
+    return new NodejsEdgeFunction(this, 'RequestLambda', {
       runtime: lambda.Runtime.NODEJS_14_X,
       handler: 'handler',
       memorySize: 128,
@@ -121,7 +121,7 @@ export class StaticWeb extends cdk.Construct {
   }
 
   private createResponseLambda() {
-    return new NodejsFunction(this, 'ResponseLambda', {
+    return new NodejsEdgeFunction(this, 'ResponseLambda', {
       runtime: lambda.Runtime.NODEJS_14_X,
       handler: 'handler',
       memorySize: 128,
