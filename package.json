@@ -51,12 +51,12 @@
     "@aws-cdk/aws-s3": "^1.118.0",
     "@aws-cdk/aws-s3-deployment": "^1.118.0",
     "@aws-cdk/core": "^1.118.0",
-    "esbuild": "^0.12.9"
+    "esbuild": "^0.12.19"
   },
   "devDependencies": {
     "@aws-cdk/assert": "^1.118.0",
-    "@types/aws-lambda": "^8.10.77",
-    "@types/node": "^15.12.3",
+    "@types/aws-lambda": "^8.10.82",
+    "@types/node": "^16.6.0",
     "cdkdx": "^1.1.0"
   },
   "eslintConfig": {
