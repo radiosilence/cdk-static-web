@@ -35,28 +35,28 @@
     "prepublishOnly": "yarn build"
   },
   "peerDependencies": {
-    "@aws-cdk/aws-lambda": "^1.119.0",
-    "@aws-cdk/core": "^1.119.0"
+    "@aws-cdk/aws-lambda": "^1.120.0",
+    "@aws-cdk/core": "^1.120.0"
   },
   "dependencies": {
-    "@aws-cdk/aws-apigateway": "^1.119.0",
-    "@aws-cdk/aws-certificatemanager": "^1.119.0",
-    "@aws-cdk/aws-cloudfront": "^1.119.0",
-    "@aws-cdk/aws-cloudfront-origins": "^1.119.0",
-    "@aws-cdk/aws-iam": "^1.119.0",
-    "@aws-cdk/aws-lambda": "^1.119.0",
-    "@aws-cdk/aws-lambda-nodejs": "^1.119.0",
-    "@aws-cdk/aws-route53": "^1.119.0",
-    "@aws-cdk/aws-route53-targets": "^1.119.0",
-    "@aws-cdk/aws-s3": "^1.119.0",
-    "@aws-cdk/aws-s3-deployment": "^1.119.0",
-    "@aws-cdk/core": "^1.119.0",
-    "esbuild": "^0.12.20"
+    "@aws-cdk/aws-apigateway": "^1.120.0",
+    "@aws-cdk/aws-certificatemanager": "^1.120.0",
+    "@aws-cdk/aws-cloudfront": "^1.120.0",
+    "@aws-cdk/aws-cloudfront-origins": "^1.120.0",
+    "@aws-cdk/aws-iam": "^1.120.0",
+    "@aws-cdk/aws-lambda": "^1.120.0",
+    "@aws-cdk/aws-lambda-nodejs": "^1.120.0",
+    "@aws-cdk/aws-route53": "^1.120.0",
+    "@aws-cdk/aws-route53-targets": "^1.120.0",
+    "@aws-cdk/aws-s3": "^1.120.0",
+    "@aws-cdk/aws-s3-deployment": "^1.120.0",
+    "@aws-cdk/core": "^1.120.0",
+    "esbuild": "^0.12.24"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.119.0",
-    "@types/aws-lambda": "^8.10.82",
-    "@types/node": "^16.6.1",
+    "@aws-cdk/assert": "^1.120.0",
+    "@types/aws-lambda": "^8.10.83",
+    "@types/node": "^16.7.8",
     "cdkdx": "^1.1.0"
   },
   "eslintConfig": {
