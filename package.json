@@ -1,6 +1,6 @@
 {
   "name": "cdk-static-web",
-  "version": "1.121.0",
+  "version": "1.127.0",
   "description": "Simple CDK web construct with Route 53, CloudFront, etc",
   "license": "MIT",
   "author": {
