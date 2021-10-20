@@ -7,14 +7,6 @@ pre-commit:
       glob: '*.{tsx,ts}'
       run: npx eslint {staged_files}
 
-pre-push:
-  parallel: true
-  commands:
-    typecheck-web:
-      run: (cd web && npx tsc --noEmit)
-    typecheck-ui:
-      run: (cd ui && npx tsc --noEmit)
-
 fixer:
   parallel: true
   commands:
