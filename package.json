@@ -54,10 +54,16 @@
     "esbuild": "^0.13.8"
   },
   "devDependencies": {
+    "@arkweid/lefthook": "^0.7.7",
     "@aws-cdk/assert": "^1.128.0",
     "@types/aws-lambda": "^8.10.84",
     "@types/node": "^16.11.1",
-    "cdkdx": "^1.4.0"
+    "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@typescript-eslint/parser": "^5.1.0",
+    "cdkdx": "^1.4.0",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.3.0",
+    "pretty-quick": "^3.1.1"
   },
   "eslintConfig": {
     "extends": [

@@ -131,16 +131,8 @@ export class StaticWeb extends cdk.Construct {
     props: StaticWebProps,
   ) {
     const errorResponses = [];
-    const {
-      distributionProps,
-      behaviourOptions,
-      isSPA,
-      certificate,
-      recordName,
-      zone,
-      errorPagePath,
-      defaultIndexes,
-    } = props;
+    const { distributionProps, behaviourOptions, isSPA, certificate, recordName, zone, errorPagePath, defaultIndexes } =
+      props;
     if (isSPA) {
       errorResponses.push({
         httpStatus: 404,
