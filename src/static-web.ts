@@ -35,9 +35,9 @@ export interface StaticWebProps extends cdk.StackProps {
   readonly certificate?: acm.ICertificate;
 
   /**
-   * The name of your A record, if you're using a subdomain
+   * List of subdomains, use `null` for root domain
    */
-  readonly recordName?: string;
+  readonly recordNames: (string | null)[];
 
   /**
    * Route 53 zone
@@ -73,8 +73,8 @@ export interface StaticWebProps extends cdk.StackProps {
 export class StaticWeb extends cdk.Construct {
   readonly bucket: s3.IBucket;
   readonly distribution: cloudfront.IDistribution;
-  readonly aRecord?: route53.ARecord;
-  readonly aaaaRecord?: route53.AaaaRecord;
+  readonly aRecords?: route53.ARecord[];
+  readonly aaaaRecords?: route53.AaaaRecord[];
   readonly deployment?: s3deploy.BucketDeployment;
   readonly originAccessIdentity?: cloudfront.OriginAccessIdentity;
 
@@ -87,8 +87,8 @@ export class StaticWeb extends cdk.Construct {
     const statement = this.createIAMStatement(this.bucket, this.originAccessIdentity);
     this.bucket.addToResourcePolicy(statement);
     this.deployment = this.createDeployment(this.bucket, props, this.distribution);
-    this.aRecord = this.createARecord(props, this.distribution);
-    this.aaaaRecord = this.createAaaaRecord(props, this.distribution);
+    this.aRecords = this.createARecords(props, this.distribution);
+    this.aaaaRecords = this.createAaaaRecords(props, this.distribution);
   }
 
   private createBucket(): s3.Bucket {
@@ -131,8 +131,16 @@ export class StaticWeb extends cdk.Construct {
     props: StaticWebProps,
   ) {
     const errorResponses = [];
-    const { distributionProps, behaviourOptions, isSPA, certificate, recordName, zone, errorPagePath, defaultIndexes } =
-      props;
+    const {
+      distributionProps,
+      behaviourOptions,
+      isSPA,
+      certificate,
+      recordNames,
+      zone,
+      errorPagePath,
+      defaultIndexes,
+    } = props;
     if (isSPA) {
       errorResponses.push({
         httpStatus: 404,
@@ -173,7 +181,9 @@ export class StaticWeb extends cdk.Construct {
     }
 
     const zoneName = zone?.zoneName;
-    const domainName = recordName && zoneName ? `${recordName}.${zoneName}` : zoneName;
+    const domainNames = zoneName
+      ? recordNames.map((recordName) => (recordName === null ? zoneName : `${recordName}.${zoneName}`))
+      : [];
 
     return new cloudfront.Distribution(this, `Distribution`, {
       defaultBehavior: {
@@ -184,7 +194,7 @@ export class StaticWeb extends cdk.Construct {
         edgeLambdas,
         ...behaviourOptions,
       },
-      domainNames: domainName ? [domainName] : [],
+      domainNames,
       defaultRootObject: 'index.html',
       errorResponses,
       certificate,
@@ -210,25 +220,31 @@ export class StaticWeb extends cdk.Construct {
     });
   }
 
-  private createARecord({ recordName, zone }: StaticWebProps, distribution: cloudfront.IDistribution) {
+  private createARecords({ recordNames, zone }: StaticWebProps, distribution: cloudfront.IDistribution) {
     if (zone) {
-      return new route53.ARecord(this, `ARecord`, {
-        zone,
-        recordName,
-        target: route53.RecordTarget.fromAlias(new alias.CloudFrontTarget(distribution)),
-      });
+      return recordNames.map(
+        (recordName) =>
+          new route53.ARecord(this, `ARecord`, {
+            zone,
+            recordName: recordName ?? undefined,
+            target: route53.RecordTarget.fromAlias(new alias.CloudFrontTarget(distribution)),
+          }),
+      );
     } else {
-      return;
+      return [];
     }
   }
 
-  private createAaaaRecord({ recordName, zone }: StaticWebProps, distribution: cloudfront.IDistribution) {
+  private createAaaaRecords({ recordNames, zone }: StaticWebProps, distribution: cloudfront.IDistribution) {
     if (zone) {
-      return new route53.AaaaRecord(this, `AAAARecord`, {
-        zone,
-        recordName,
-        target: route53.RecordTarget.fromAlias(new alias.CloudFrontTarget(distribution)),
-      });
+      return recordNames.map(
+        (recordName) =>
+          new route53.AaaaRecord(this, `AAAARecord`, {
+            zone,
+            recordName: recordName ?? undefined,
+            target: route53.RecordTarget.fromAlias(new alias.CloudFrontTarget(distribution)),
+          }),
+      );
     } else {
       return;
     }
