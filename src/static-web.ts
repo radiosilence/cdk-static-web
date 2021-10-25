@@ -224,7 +224,7 @@ export class StaticWeb extends cdk.Construct {
     if (zone) {
       return recordNames.map(
         (recordName) =>
-          new route53.ARecord(this, `ARecord`, {
+          new route53.ARecord(this, `ARecord-${recordName ?? '@'}`, {
             zone,
             recordName: recordName ?? undefined,
             target: route53.RecordTarget.fromAlias(new alias.CloudFrontTarget(distribution)),
@@ -239,7 +239,7 @@ export class StaticWeb extends cdk.Construct {
     if (zone) {
       return recordNames.map(
         (recordName) =>
-          new route53.AaaaRecord(this, `AAAARecord`, {
+          new route53.AaaaRecord(this, `AAAARecord-${recordName ?? '@'}`, {
             zone,
             recordName: recordName ?? undefined,
             target: route53.RecordTarget.fromAlias(new alias.CloudFrontTarget(distribution)),
