@@ -4,6 +4,8 @@ export async function handler(event: CloudFrontResponseEvent): Promise<CloudFron
     console.log('event', event);
     const { request, response } = event.Records[0].cf;
 
+    if (Number(response.status) >= 400) return response;
+
     const rewritten = request.headers['x-rewritten'];
     const originalUri = request.headers['x-original-uri']?.[0]?.value;
 
