@@ -7,9 +7,7 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "inlineSources": true,
-    "lib": [
-      "es2018"
-    ],
+    "lib": ["es2018"],
     "module": "CommonJS",
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
@@ -23,12 +21,9 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "stripInternal": true,
-    "target": "ES2018"
+    "target": "ES2018",
+    "jsx": "react"
   },
-  "exclude": [
-    "**/__tests__/*"
-  ],
-  "include": [
-    "**/*.ts"
-  ]
+  "exclude": ["**/__tests__/*"],
+  "include": ["**/*.ts", "**/*.tsx"]
 }

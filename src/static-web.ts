@@ -37,7 +37,7 @@ export interface StaticWebProps extends cdk.StackProps {
   /**
    * List of subdomains, use `null` for root domain
    */
-  readonly recordNames: (string | null)[];
+  readonly recordNames?: (string | null)[];
 
   /**
    * Route 53 zone
@@ -181,9 +181,10 @@ export class StaticWeb extends cdk.Construct {
     }
 
     const zoneName = zone?.zoneName;
-    const domainNames = zoneName
-      ? recordNames.map((recordName) => (recordName === null ? zoneName : `${recordName}.${zoneName}`))
-      : [];
+    const domainNames =
+      zoneName && recordNames
+        ? recordNames.map((recordName) => (recordName === null ? zoneName : `${recordName}.${zoneName}`))
+        : undefined;
 
     return new cloudfront.Distribution(this, `Distribution`, {
       defaultBehavior: {
@@ -221,7 +222,7 @@ export class StaticWeb extends cdk.Construct {
   }
 
   private createARecords({ recordNames, zone }: StaticWebProps, distribution: cloudfront.IDistribution) {
-    if (zone) {
+    if (zone && recordNames) {
       return recordNames.map(
         (recordName) =>
           new route53.ARecord(this, `ARecord-${recordName ?? '@'}`, {
@@ -236,7 +237,7 @@ export class StaticWeb extends cdk.Construct {
   }
 
   private createAaaaRecords({ recordNames, zone }: StaticWebProps, distribution: cloudfront.IDistribution) {
-    if (zone) {
+    if (zone && recordNames) {
       return recordNames.map(
         (recordName) =>
           new route53.AaaaRecord(this, `AAAARecord-${recordName ?? '@'}`, {
