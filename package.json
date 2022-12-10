@@ -1,6 +1,6 @@
 {
   "name": "cdk-static-web",
-  "version": "1.159.0",
+  "version": "1.182.0",
   "description": "Simple CDK web construct with Route 53, CloudFront, etc",
   "license": "MIT",
   "author": {
@@ -35,33 +35,33 @@
     "prepublishOnly": "yarn build"
   },
   "peerDependencies": {
-    "@aws-cdk/aws-lambda": "^1.159.0",
-    "@aws-cdk/core": "^1.159.0"
+    "@aws-cdk/aws-lambda": "^1.182.0",
+    "@aws-cdk/core": "^1.182.0"
   },
   "dependencies": {
-    "@aws-cdk/aws-apigateway": "^1.159.0",
-    "@aws-cdk/aws-certificatemanager": "^1.159.0",
-    "@aws-cdk/aws-cloudfront": "^1.159.0",
-    "@aws-cdk/aws-cloudfront-origins": "^1.159.0",
-    "@aws-cdk/aws-iam": "^1.159.0",
-    "@aws-cdk/aws-lambda": "^1.159.0",
-    "@aws-cdk/aws-lambda-nodejs": "^1.159.0",
-    "@aws-cdk/aws-route53": "^1.159.0",
-    "@aws-cdk/aws-route53-targets": "^1.159.0",
-    "@aws-cdk/aws-s3": "^1.159.0",
-    "@aws-cdk/aws-s3-deployment": "^1.159.0",
-    "@aws-cdk/core": "^1.159.0",
-    "esbuild": "^0.14.38"
+    "@aws-cdk/aws-apigateway": "^1.182.0",
+    "@aws-cdk/aws-certificatemanager": "^1.182.0",
+    "@aws-cdk/aws-cloudfront": "^1.182.0",
+    "@aws-cdk/aws-cloudfront-origins": "^1.182.0",
+    "@aws-cdk/aws-iam": "^1.182.0",
+    "@aws-cdk/aws-lambda": "^1.182.0",
+    "@aws-cdk/aws-lambda-nodejs": "^1.182.0",
+    "@aws-cdk/aws-route53": "^1.182.0",
+    "@aws-cdk/aws-route53-targets": "^1.182.0",
+    "@aws-cdk/aws-s3": "^1.182.0",
+    "@aws-cdk/aws-s3-deployment": "^1.182.0",
+    "@aws-cdk/core": "^1.182.0",
+    "esbuild": "^0.16.4"
   },
   "devDependencies": {
     "@arkweid/lefthook": "^0.7.7",
-    "@aws-cdk/assert": "^1.159.0",
-    "@types/aws-lambda": "^8.10.95",
-    "@types/node": "^17.0.31",
-    "@typescript-eslint/eslint-plugin": "^5.22.0",
-    "@typescript-eslint/parser": "^5.22.0",
-    "cdkdx": "^1.7.0",
-    "eslint": "^8.14.0",
+    "@aws-cdk/assert": "^1.182.0",
+    "@types/aws-lambda": "^8.10.109",
+    "@types/node": "^18.11.12",
+    "@typescript-eslint/eslint-plugin": "^5.46.0",
+    "@typescript-eslint/parser": "^5.46.0",
+    "cdkdx": "^1.9.0",
+    "eslint": "^8.29.0",
     "eslint-config-prettier": "^8.5.0",
     "pretty-quick": "^3.1.3"
   },
