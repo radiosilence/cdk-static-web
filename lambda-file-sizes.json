@@ -1,5 +1,12 @@
 [
   {
+    "timestamp": 1670677965840,
+    "files": [
+      { "filename": "request/index.js", "previous": 1649, "size": 1717, "diff": 68 },
+      { "filename": "response/index.js", "previous": 1542, "size": 1542, "diff": 0 }
+    ]
+  },
+  {
     "timestamp": 1636377785792,
     "files": [
       { "filename": "request/index.js", "previous": 1649, "size": 1649, "diff": 0 },
