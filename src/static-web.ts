@@ -55,6 +55,11 @@ export interface StaticWebProps extends cdk.StackProps {
   readonly distributionProps?: Partial<cloudfront.DistributionProps>;
 
   /**
+   * Whether to skip deployment and only create infra.
+   */
+  readonly skipDeployment?: boolean;
+
+  /**
    * Additional props to pass to S3 deployment
    */
   readonly deploymentProps?: Partial<s3deploy.BucketDeploymentProps>;
@@ -86,9 +91,11 @@ export class StaticWeb extends cdk.Construct {
     this.distribution = this.createDistribution(this.bucket, this.originAccessIdentity, props);
     const statement = this.createIAMStatement(this.bucket, this.originAccessIdentity);
     this.bucket.addToResourcePolicy(statement);
-    this.deployment = this.createDeployment(this.bucket, props, this.distribution);
     this.aRecords = this.createARecords(props, this.distribution);
     this.aaaaRecords = this.createAaaaRecords(props, this.distribution);
+    if (!props.skipDeployment) {
+      this.deployment = this.createDeployment(this.bucket, props, this.distribution);
+    }
   }
 
   private createBucket(): s3.Bucket {
