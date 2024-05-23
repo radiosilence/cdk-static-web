@@ -1,4 +1,5 @@
 import { spawnSync } from 'child_process';
+
 import { tryGetModuleVersion } from './util.ts';
 
 /**

@@ -1,18 +1,19 @@
 import {
+  aws_certificatemanager as acm,
   aws_cloudfront as cloudfront,
   aws_cloudfront_origins as cforigins,
   aws_iam as iam,
   aws_lambda as lambda,
   aws_route53 as route53,
-  aws_s3 as s3,
-  aws_certificatemanager as acm,
   aws_route53_targets as r53targets,
-  StackProps,
+  aws_s3 as s3,
   aws_s3_deployment as s3deploy,
+  StackProps,
 } from 'aws-cdk-lib';
 import { BucketDeploymentProps } from 'aws-cdk-lib/aws-s3-deployment';
 import { Construct } from 'constructs';
 import path from 'path';
+
 import { NodejsEdgeFunction } from './lambda-edge-nodejs/index.ts';
 
 export interface StaticWebProps extends StackProps {

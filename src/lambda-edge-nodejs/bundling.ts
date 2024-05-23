@@ -1,6 +1,7 @@
+import { AssetHashType, AssetStaging, aws_lambda as lambda, DockerImage, ILocalBundling } from 'aws-cdk-lib';
 import * as os from 'os';
 import * as path from 'path';
-import { AssetHashType, AssetStaging, aws_lambda as lambda, DockerImage, ILocalBundling } from 'aws-cdk-lib';
+
 import { EsbuildInstallation } from './esbuild-installation.ts';
 import { PackageManager } from './package-manager.ts';
 import { BundlingOptions, SourceMapMode } from './types.ts';

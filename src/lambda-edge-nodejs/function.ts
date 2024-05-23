@@ -2,6 +2,7 @@ import { aws_cloudfront as cloudfront, aws_lambda as lambda } from 'aws-cdk-lib'
 import { Construct } from 'constructs';
 import * as fs from 'fs';
 import * as path from 'path';
+
 import { Bundling } from './bundling.ts';
 import { PackageManager } from './package-manager.ts';
 import { BundlingOptions } from './types.ts';
