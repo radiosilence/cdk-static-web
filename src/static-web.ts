@@ -1,17 +1,21 @@
-import * as acm from '@aws-cdk/aws-certificatemanager';
-import * as cloudfront from '@aws-cdk/aws-cloudfront';
-import * as origins from '@aws-cdk/aws-cloudfront-origins';
-import * as iam from '@aws-cdk/aws-iam';
-import * as lambda from '@aws-cdk/aws-lambda';
-import * as route53 from '@aws-cdk/aws-route53';
-import * as alias from '@aws-cdk/aws-route53-targets';
-import * as s3 from '@aws-cdk/aws-s3';
-import * as s3deploy from '@aws-cdk/aws-s3-deployment';
-import * as cdk from '@aws-cdk/core';
-import * as path from 'path';
+import {
+  aws_cloudfront as cloudfront,
+  aws_cloudfront_origins as cforigins,
+  aws_iam as iam,
+  aws_lambda as lambda,
+  aws_route53 as route53,
+  aws_s3 as s3,
+  aws_certificatemanager as acm,
+  aws_route53_targets as r53targets,
+  StackProps,
+  aws_s3_deployment as s3deploy,
+} from 'aws-cdk-lib';
+import { BucketDeploymentProps } from 'aws-cdk-lib/aws-s3-deployment';
+import { Construct } from 'constructs';
+import path from 'path';
 import { NodejsEdgeFunction } from './lambda-edge-nodejs';
 
-export interface StaticWebProps extends cdk.StackProps {
+export interface StaticWebProps extends StackProps {
   readonly environment?: Record<string, string>;
 
   /**
@@ -62,7 +66,7 @@ export interface StaticWebProps extends cdk.StackProps {
   /**
    * Additional props to pass to S3 deployment
    */
-  readonly deploymentProps?: Partial<s3deploy.BucketDeploymentProps>;
+  readonly deploymentProps?: Partial<BucketDeploymentProps>;
 
   /**
    * Additional props to pass to CloudFront distribution
@@ -75,7 +79,7 @@ export interface StaticWebProps extends cdk.StackProps {
   readonly errorPagePath?: string;
 }
 
-export class StaticWeb extends cdk.Construct {
+export class StaticWeb extends Construct {
   readonly bucket: s3.IBucket;
   readonly distribution: cloudfront.IDistribution;
   readonly aRecords?: route53.ARecord[];
@@ -83,7 +87,7 @@ export class StaticWeb extends cdk.Construct {
   readonly deployment?: s3deploy.BucketDeployment;
   readonly originAccessIdentity?: cloudfront.OriginAccessIdentity;
 
-  constructor(scope: cdk.Construct, id: string, props: StaticWebProps) {
+  constructor(scope: Construct, id: string, props: StaticWebProps) {
     super(scope, id);
 
     this.originAccessIdentity = this.createOriginAccessIdentity();
@@ -137,7 +141,7 @@ export class StaticWeb extends cdk.Construct {
     originAccessIdentity: cloudfront.OriginAccessIdentity,
     props: StaticWebProps,
   ) {
-    const errorResponses = [];
+    const errorResponses: cloudfront.ErrorResponse[] = [];
     const {
       distributionProps,
       behaviourOptions,
@@ -195,7 +199,7 @@ export class StaticWeb extends cdk.Construct {
 
     return new cloudfront.Distribution(this, `Distribution`, {
       defaultBehavior: {
-        origin: new origins.S3Origin(bucket, {
+        origin: new cforigins.S3Origin(bucket, {
           originAccessIdentity,
         }),
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
@@ -235,7 +239,7 @@ export class StaticWeb extends cdk.Construct {
           new route53.ARecord(this, `ARecord-${recordName ?? '@'}`, {
             zone,
             recordName: recordName ?? undefined,
-            target: route53.RecordTarget.fromAlias(new alias.CloudFrontTarget(distribution)),
+            target: route53.RecordTarget.fromAlias(new r53targets.CloudFrontTarget(distribution)),
           }),
       );
     } else {
@@ -250,7 +254,7 @@ export class StaticWeb extends cdk.Construct {
           new route53.AaaaRecord(this, `AAAARecord-${recordName ?? '@'}`, {
             zone,
             recordName: recordName ?? undefined,
-            target: route53.RecordTarget.fromAlias(new alias.CloudFrontTarget(distribution)),
+            target: route53.RecordTarget.fromAlias(new r53targets.CloudFrontTarget(distribution)),
           }),
       );
     } else {

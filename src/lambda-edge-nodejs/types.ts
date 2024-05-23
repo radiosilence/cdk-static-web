@@ -1,4 +1,4 @@
-import { DockerImage } from '@aws-cdk/core';
+import { DockerImage } from 'aws-cdk-lib';
 
 /**
  * Bundling options
@@ -87,7 +87,7 @@ export interface BundlingOptions {
    *
    * @default - automatically discovered by `esbuild`
    */
-  readonly tsconfig? : string
+  readonly tsconfig?: string;
 
   /**
    * This option tells esbuild to write out a JSON file relative to output directory with metadata about the build.
@@ -115,7 +115,7 @@ export interface BundlingOptions {
    * @see https://esbuild.github.io/api/#metafile
    * @default - false
    */
-  readonly metafile?: boolean
+  readonly metafile?: boolean;
 
   /**
    * Use this to insert an arbitrary string at the beginning of generated JavaScript files.
@@ -126,7 +126,7 @@ export interface BundlingOptions {
    *
    * @default -  no comments are passed
    */
-  readonly banner? : string
+  readonly banner?: string;
 
   /**
    * Use this to insert an arbitrary string at the end of generated JavaScript files.
@@ -137,14 +137,14 @@ export interface BundlingOptions {
    *
    * @default -  no comments are passed
    */
-  readonly footer? : string
+  readonly footer?: string;
 
   /**
    * Environment variables defined when bundling runs.
    *
    * @default - no environment variables are defined.
    */
-  readonly environment?: { [key: string]: string; };
+  readonly environment?: { [key: string]: string };
 
   /**
    * Replace global identifiers with constant expressions.
@@ -185,7 +185,7 @@ export interface BundlingOptions {
    *
    * @default - no build arguments are passed
    */
-  readonly buildArgs?: { [key:string] : string };
+  readonly buildArgs?: { [key: string]: string };
 
   /**
    * Force bundling in a Docker container even if local bundling is
@@ -275,7 +275,6 @@ export enum LogLevel {
   SILENT = 'silent',
 }
 
-
 /**
  * SourceMap mode for esbuild
  * @see https://esbuild.github.io/api/#sourcemap
@@ -298,5 +297,5 @@ export enum SourceMapMode {
   /**
    * Both sourceMap mode - If you want to have the effect of both inline and external simultaneously
    */
-  BOTH = 'both'
+  BOTH = 'both',
 }
