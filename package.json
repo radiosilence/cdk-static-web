@@ -24,14 +24,7 @@
     "lib"
   ],
   "scripts": {
-    "build": "cdkdx build",
-    "watch": "cdkdx build -w",
-    "test": "cdkdx test",
-    "lint": "cdkdx lint",
-    "upgrade:cdk": "cdkdx upgrade-cdk && yarn",
-    "docgen": "cdkdx docgen",
-    "package": "cdkdx package",
-    "release:npm": "cdkdx release npm",
+    "build": "esbuild build src/index.ts --bundle --platform=node --target=node20 --outdir=lib",
     "prepublishOnly": "yarn build"
   },
   "peerDependencies": {},

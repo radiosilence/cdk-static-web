@@ -2,7 +2,7 @@ import { aws_cloudfront as cloudfront, aws_lambda as lambda } from 'aws-cdk-lib'
 import { Construct } from 'constructs';
 import * as fs from 'fs';
 import * as path from 'path';
-import { Bundling } from './bundling';
+import Bundling from './bundling';
 import { PackageManager } from './package-manager';
 import { BundlingOptions } from './types';
 import { callsites, findUp } from './util';
