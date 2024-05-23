@@ -19,7 +19,7 @@
   "engines": {
     "node": ">= 10.17.0"
   },
-  "main": "dist/index.min.mjs",
+  "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"

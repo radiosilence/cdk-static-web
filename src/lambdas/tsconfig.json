@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "alwaysStrict": true,
-    "charset": "utf8",
     "declaration": false,
     "experimentalDecorators": true,
     "esModuleInterop": true,
@@ -9,7 +8,7 @@
     "inlineSources": true,
     "lib": ["es2018"],
     "module": "CommonJS",
-    "noEmit": true,
+    "noEmit": false,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
