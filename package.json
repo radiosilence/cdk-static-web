@@ -18,7 +18,7 @@
   "engines": {
     "node": ">= 10.17.0"
   },
-  "main": "lib/index.mjs",
+  "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
     "lib"
