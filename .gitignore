@@ -65,11 +65,4 @@ typings/
 # next.js build output
 .next
 
-# cdkdx
-.DS_Store
-lib
-*.tsbuildinfo
-tsconfig.json
-tsconfig.eslint.json
-cdk.out
-cdk.context.json
+dist

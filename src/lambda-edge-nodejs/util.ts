@@ -28,7 +28,7 @@ export function callsites(): CallSite[] {
   Error.prepareStackTrace = (_, stack) => stack;
   const stack = new Error().stack?.slice(1);
   Error.prepareStackTrace = _prepareStackTrace;
-  return (stack as unknown) as CallSite[];
+  return stack as unknown as CallSite[];
 }
 
 /**
@@ -63,9 +63,9 @@ export function exec(cmd: string, args: string[], options?: SpawnSyncOptions) {
   if (proc.status !== 0) {
     if (proc.stdout || proc.stderr) {
       throw new Error(
-        `[Status ${
-          proc.status
-        }] stdout: ${proc.stdout?.toString().trim()}\n\n\nstderr: ${proc.stderr?.toString().trim()}`,
+        `[Status ${proc.status}] stdout: ${proc.stdout?.toString().trim()}\n\n\nstderr: ${proc.stderr
+          ?.toString()
+          .trim()}`,
       );
     }
     throw new Error(`${cmd} exited with status ${proc.status}`);

@@ -1,8 +1,9 @@
 {
   "name": "cdk-static-web",
-  "version": "2.142.1-1",
+  "version": "2.142.1-2",
   "description": "Simple CDK web construct with Route 53, CloudFront, etc",
   "license": "MIT",
+  "type": "module",
   "author": {
     "name": "James Cleveland",
     "url": "https://github.com/radiosilence"
@@ -18,13 +19,13 @@
   "engines": {
     "node": ">= 10.17.0"
   },
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.min.mjs",
+  "types": "dist/index.d.ts",
   "files": [
-    "lib"
+    "dist"
   ],
   "scripts": {
-    "build": "tsc --outdir ./lib",
+    "build": "tsc --outdir ./dist && node esbuild.config.mjs",
     "prepublishOnly": "bun run build"
   },
   "peerDependencies": {},

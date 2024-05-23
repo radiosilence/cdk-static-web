@@ -1,5 +1,5 @@
 import { spawnSync } from 'child_process';
-import { tryGetModuleVersion } from './util';
+import { tryGetModuleVersion } from './util.ts';
 
 /**
  * An esbuild installation
