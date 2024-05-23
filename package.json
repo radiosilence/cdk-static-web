@@ -18,14 +18,14 @@
   "engines": {
     "node": ">= 10.17.0"
   },
-  "main": "lib/index.js",
+  "main": "lib/index.mjs",
   "types": "lib/index.d.ts",
   "files": [
     "lib"
   ],
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --platform=node --target=node20 --outdir=lib",
-    "prepublishOnly": "yarn build"
+    "build": "tsc",
+    "prepublishOnly": "bun run build"
   },
   "peerDependencies": {},
   "dependencies": {
