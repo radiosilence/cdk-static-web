@@ -24,7 +24,7 @@
     "lib"
   ],
   "scripts": {
-    "build": "esbuild build src/index.ts --bundle --platform=node --target=node20 --outdir=lib",
+    "build": "esbuild src/index.ts --bundle --platform=node --target=node20 --outdir=lib",
     "prepublishOnly": "yarn build"
   },
   "peerDependencies": {},
@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@aws-cdk/assert": "^2.68.0",
+    "@tsconfig/bun": "^1.0.5",
     "@types/aws-lambda": "^8.10.138",
     "@types/node": "^20.12.12",
     "@typescript-eslint/eslint-plugin": "^7.10.0",
