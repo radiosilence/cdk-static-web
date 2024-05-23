@@ -24,7 +24,7 @@
     "lib"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --outdir ./lib",
     "prepublishOnly": "bun run build"
   },
   "peerDependencies": {},
